@@ -44,3 +44,11 @@ let	promise	= new ReversePromise((resolve) => {
 .then(() =>	console.log(4))
 
 //1, 4, 3, 2
+
+// const myPromises = [
+//     new Promise((resolve) => setTimeout(() => {resolve('A (slow)'); console.log('A (slow)')}, 1000)),
+//     new Promise((resolve) => setTimeout(() => {resolve('B (slower)'); console.log('B (slower)')}, 2000)),
+//     new Promise((resolve) => setTimeout(() => {resolve('C (fast)'); console.log('C (fast)')}, 10))
+//   ];
+  
+//   Promise.all(myPromises).then(console.log)
