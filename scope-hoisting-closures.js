@@ -57,20 +57,25 @@ function curry(func) {
   }
 
 function sumNumbers (){
-    let finalSum = 0;
+    // let finalSum = 0;
 
-    for (let i = 0; i < arguments.length; i++) {
-       finalSum += arguments[i];
+    // for (let i = 0; i < arguments.length; i++) {
+    //    finalSum += arguments[i];
+    // }
+
+    if(arguments.length <= 0){
+      return 0;
     }
-    
-    return finalSum;
+    return sumNumbers() + arguments.length - 1;
 }
 
-function sum1(a, b, c,d) {
+console.log(sumNumbers(1,2,3,4,5))
+
+function sum1(a, b, c, d) {
     return a + b + c + d;
   }
 
-let test = curry(sum1)
+let test = curry(sumNumbers)
 console.log(test(1)(2)(3)(4));
 
 
