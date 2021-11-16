@@ -2,18 +2,61 @@ class Person{
     constructor(){
         this.firstName = arguments[0];
         this.lastName = arguments[1];
-        this.fullName = this.firstName + ' ' + this.lastName;
+    }
+
+    get firstNameGetter(){
+        return this.firstName;
+    }
+    get lastNameGetter(){
+        return this.lastName;
+    }
+
+    get fullName(){
+        return `${this.firstName} ${this.lastName}`
+    }
+
+    set firstNameSetter(firstName){
+        this.firstName = firstName;
+    }
+
+    set lastNameSetter(lastName){
+        this.lastName = lastName;
     }
     
+    set fullName(newFullName){
+        let fullNameSplitArray = newFullName.split(" ");
+        if(fullNameSplitArray.length==1){
+            return `${this.firstName} ${this.lastName}`;
+        }
+        this.firstName = fullNameSplitArray[0];
+        this.lastName = fullNameSplitArray[1];
+        return `${this.firstName} ${this.lastName}`;
+    }
 }
 
-function namedOne(){
-    return new Person(arguments[0], arguments[1]);
-}
+let firstPerson = new Person("Anton", "Fedorenko");
 
-let firstPerson = namedOne("Anton", "Fedorenko");
+// Имя, фамилия, полное имя
+console.log(firstPerson.firstName);
+console.log(firstPerson.lastName);
+console.log(firstPerson.fullName);
 
-let secondPerson = namedOne("Irina", "Esina")
+// Меняем на новое имя фимия по очереди
+firstPerson.firstName = "Anna"; 
+firstPerson.lastName = "Kotik";
 
-console.log(firstPerson);
-console.log(secondPerson);
+console.log(firstPerson.firstName);
+console.log(firstPerson.lastName);
+console.log(firstPerson.fullName);
+
+// Меняем сразу полное имя 
+firstPerson.fullName = "Igor Petrovich";
+
+console.log(firstPerson.fullName);
+console.log(firstPerson.firstName);
+console.log(firstPerson.lastName);
+
+// Без пробела имя не меняется
+firstPerson.fullName = "UncleBogdan";
+
+console.log(firstPerson.fullName); //Ожидается: Igor Petrovich
