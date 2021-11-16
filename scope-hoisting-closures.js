@@ -96,17 +96,16 @@
 //         }
 //     }
 // }
-
+let innerArray = [];
 function curr1(innerFunc){
-  let innerArray = [];
-  
+ 
   return function curried(someArgs){
-    if(arguments === null){
+    if(someArgs === null){
       return innerFunc(innerArray);
   }
     innerArray.push(someArgs)
     
-    return curr1(someArgs);
+    return curried(someArgs);
   }
 }
 
@@ -116,5 +115,5 @@ function sum(...values){
 
 const test = curr1(sum)
 
-console.log(test(2,3))
+//console.log(test(2,3))
 console.log(test(2)(3))
