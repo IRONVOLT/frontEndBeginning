@@ -18,82 +18,103 @@
 // console.log(rAcg(12))
 
 //=============================================================
+//================== My own realization =======================
+// function carr1(innerFunc) {
+//     return function (firstValue) {
+//         return function (secondValue) {
+//             return innerFunc(firstValue, secondValue);
+//         }
+//     }
+// }
 
+// function carr2(innerFunc) {
+//     return function (firstValue) {
+//         return function (secondValue) {
+//             return function (thirdValue) {
+//                 return function (fourthValue) {
+//                     return innerFunc(firstValue, secondValue, thirdValue, fourthValue);
+//                 }
+//             }
+//         }
+//     }
+// }
 
+// function sumNumbers (){
+//   let finalSum = 0;
 
-function carr1(innerFunc) {
-    return function (firstValue) {
-        return function (secondValue) {
-            return innerFunc(firstValue, secondValue);
-        }
-    }
-}
+//   for (let i = 0; i < arguments.length; i++) {
+//       finalSum += arguments[i];
+//   }
+//   if(arguments.length <= 0){
+//     return 0;
+//   }
 
-function carr2(innerFunc) {
-    return function (firstValue) {
-        return function (secondValue) {
-            return function (thirdValue) {
-                return function (fourthValue) {
-                    return innerFunc(firstValue, secondValue, thirdValue, fourthValue);
-                }
-            }
-        }
-    }
-}
+//   return finalSum;
+// }
 
-function curry(func) {
-
-    return function curried(...args) {
-      if (args.length >= func.length) {
-          console.dir(func)
-        return func.apply(this, args);
-      } else {
-        return function(...args2) {
-          return curried.apply(this, args.concat(args2));
-        }
-      }
-    };
-  
-  }
-
-function sumNumbers (){
-    // let finalSum = 0;
-
-    // for (let i = 0; i < arguments.length; i++) {
-    //    finalSum += arguments[i];
-    // }
-
-    if(arguments.length <= 0){
-      return 0;
-    }
-    return sumNumbers() + arguments.length - 1;
-}
-
-console.log(sumNumbers(1,2,3,4,5))
-
-function sum1(a, b, c, d) {
-    return a + b + c + d;
-  }
-
-let test = curry(sumNumbers)
-console.log(test(1)(2)(3)(4));
-
-
-
-// console.log(sumNumbers(1, 2, 3));
 // sum = carr1(sumNumbers);
 // console.log(sum(1)(2));
 // sum = carr2(sumNumbers);
 // console.log(sum(1)(2)(3)(4));
 
-// const sum  = function (firsFunctionValue) {
-//     if(arguments.length === 2) {
-//         return arguments[0] + arguments[1];
-//     }
-//     return function (ca) {
-//         if (b) {
-//             return sum2(a+b); 
-//         }
-//         return a; 
-//     }
+//==================================================================
+//============ FINAL CHANCE ===============
+// const sum  = function (a) {
+//   if(arguments.length === 2) {
+//       return arguments[0] + arguments[1]
+//   }
+//   return function (b) {
+//       if (b) {
+//           return sum(a+b); 
+//       }
+//       return a; 
+//   }
 // };
+// console.log(sum(1,2));
+// console.log(sum(1)(2)(3)(4));
+
+//===================================================================
+
+// function indianGuyGuideVideo(innerFunction){
+//   return function curried(...innerArguments){
+//     return (innerFunction.length <= innerArguments.length) ? innerFunction.call(this, ...innerArguments) : (...moreInnerArguments) => curried(...innerArguments, ...moreInnerArguments)
+//   }
+// }
+
+// const sum = (...values) => values.reduce((a,b) => a+b);
+
+// const curried = indianGuyGuideVideo(sum)
+
+// console.log(curried(1)(2))
+
+//==================================================================
+
+// function carr1(innerFunc) {
+//     return function (firstValue) {
+//         return function (secondValue) {
+//             return innerFunc(firstValue, secondValue);
+//         }
+//     }
+// }
+
+function curr1(innerFunc){
+  let innerArray = [];
+  
+  return function curried(someArgs){
+    if(arguments === null){
+      return innerFunc(innerArray);
+  }
+    innerArray.push(someArgs)
+    
+    return curr1(someArgs);
+  }
+}
+
+function sum(...values){
+  return values.reduce((a, b) => a + b);
+}
+
+const test = curr1(sum)
+
+console.log(test(2,3))
+console.log(test(2)(3))
