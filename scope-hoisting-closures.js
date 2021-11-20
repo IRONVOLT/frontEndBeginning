@@ -1,44 +1,50 @@
 function runningAverage() {
-  let baseAvarageValue;
+  let baseValue = [];
+  let averageValue;
 
-  return (avarageValue) => {
-    if ( typeof baseAvarageValue === "undefined") {
-      baseAvarageValue = avarageValue;
+  return (newValue) => {
+    if (baseValue.length == 0) {
+      baseValue.push(newValue);
+      return newValue;
     }
-    if (typeof baseAvarageValue === "number") {
-      baseAvarageValue = avarageValue;
+    if(baseValue.length == 1){
+      baseValue.push(newValue)
+      averageValue = (baseValue[0] + baseValue[1]) / 2;
+      baseValue.shift();
+      return averageValue;
     }
-    return (baseAvarageValue + avarageValue) / 2;
-  };
+  }
 }
 
 rAcg = runningAverage();
 console.log(rAcg(10));
 console.log(rAcg(11));
+console.log(rAcg(12));
 console.log(rAcg(13));
+console.log(rAcg(14));
 
 //=============================================================
 
-let innerArray = [];
-function curr1(innerFunc) {
-  return function curried(someArgs) {
-    if (someArgs === null) {
-      return innerFunc(innerArray);
-    }
-    innerArray.push(someArgs);
+// let innerArray = [];
+// function curr1(innerFunc) {
+//   return function curried(someArgs) {
+//     if (someArgs === null) {
+//       return innerFunc(innerArray);
+//     }
+//     innerArray.push(someArgs);
 
-    return curried(someArgs);
-  };
-}
+//     return curried(someArgs);
+//   };
+// }
 
-function sum(...values) {
-  return values.reduce((a, b) => a + b);
-}
+// function sum(...values) {
+//   return values.reduce((a, b) => a + b);
+// }
 
-const test = curr1(sum);
+// const test = curr1(sum);
 
-//console.log(test(2,3))
-console.log(test(2)(3));
+// //console.log(test(2,3))
+// console.log(test(2)(3));
 
 //================== My own realization =======================
 // function carr1(innerFunc) {
