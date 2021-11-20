@@ -1,23 +1,45 @@
-// function runningAverage() {
-//     let baseAvarageValue;
+function runningAverage() {
+  let baseAvarageValue;
 
-//     return (avarageValue) => {
-//         if (baseAvarageValue === undefined) {
-//             baseAvarageValue = avarageValue;
-//             if(baseAvarageValue === Number){
-//                 baseAvarageValue = avarageValue;
-//             }
-//         }
-//         return (baseAvarageValue + avarageValue) / 2;
-//     };
-// }
+  return (avarageValue) => {
+    if ( typeof baseAvarageValue === "undefined") {
+      baseAvarageValue = avarageValue;
+    }
+    if (typeof baseAvarageValue === "number") {
+      baseAvarageValue = avarageValue;
+    }
+    return (baseAvarageValue + avarageValue) / 2;
+  };
+}
 
-// rAcg = runningAverage();
-// console.log(rAcg(10))
-// console.log(rAcg(11))
-// console.log(rAcg(12))
+rAcg = runningAverage();
+console.log(rAcg(10));
+console.log(rAcg(11));
+console.log(rAcg(13));
 
 //=============================================================
+
+let innerArray = [];
+function curr1(innerFunc) {
+  return function curried(someArgs) {
+    if (someArgs === null) {
+      return innerFunc(innerArray);
+    }
+    innerArray.push(someArgs);
+
+    return curried(someArgs);
+  };
+}
+
+function sum(...values) {
+  return values.reduce((a, b) => a + b);
+}
+
+const test = curr1(sum);
+
+//console.log(test(2,3))
+console.log(test(2)(3));
+
 //================== My own realization =======================
 // function carr1(innerFunc) {
 //     return function (firstValue) {
@@ -65,9 +87,9 @@
 //   }
 //   return function (b) {
 //       if (b) {
-//           return sum(a+b); 
+//           return sum(a+b);
 //       }
-//       return a; 
+//       return a;
 //   }
 // };
 // console.log(sum(1,2));
@@ -96,24 +118,3 @@
 //         }
 //     }
 // }
-let innerArray = [];
-function curr1(innerFunc){
- 
-  return function curried(someArgs){
-    if(someArgs === null){
-      return innerFunc(innerArray);
-  }
-    innerArray.push(someArgs)
-    
-    return curried(someArgs);
-  }
-}
-
-function sum(...values){
-  return values.reduce((a, b) => a + b);
-}
-
-const test = curr1(sum)
-
-//console.log(test(2,3))
-console.log(test(2)(3))

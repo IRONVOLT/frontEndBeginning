@@ -4,33 +4,16 @@ class Person{
         this.lastName = arguments[1];
     }
 
-    get firstNameGetter(){
-        return this.firstName;
-    }
-    get lastNameGetter(){
-        return this.lastName;
-    }
-
     get fullName(){
         return `${this.firstName} ${this.lastName}`
     }
 
-    set firstNameSetter(firstName){
-        this.firstName = firstName;
-    }
-
-    set lastNameSetter(lastName){
-        this.lastName = lastName;
-    }
-    
     set fullName(newFullName){
         let fullNameSplitArray = newFullName.split(" ");
-        if(fullNameSplitArray.length==1){
-            return `${this.firstName} ${this.lastName}`;
+        if(fullNameSplitArray.length > 1){
+            this.firstName = fullNameSplitArray[0];
+            this.lastName = fullNameSplitArray[1];
         }
-        this.firstName = fullNameSplitArray[0];
-        this.lastName = fullNameSplitArray[1];
-        return `${this.firstName} ${this.lastName}`;
     }
 }
 
