@@ -61,6 +61,8 @@ class MyPromise extends Promise {
 // IDEA I HAVE EVER HEARD OF.
 // IF YOU WRITE CODE LIKE THIS
 // YOUR TEAMMATES WILL NOT LIKE YOU.
+
+
 class ReversePromise extends Promise {
     constructor(fn) {
         super(_ => _());
@@ -69,6 +71,10 @@ class ReversePromise extends Promise {
     }
     then(fn) {
         this.stack.push(fn);
+        if(this.stack.length === 3)
+        {
+            this.run();
+        }
         return this;
     }
 
@@ -87,16 +93,17 @@ class ReversePromise extends Promise {
     }
 }
 
-const { MyPromise, ReversePromise } = require('.');
-
-const myP = (new MyPromise(res => {
-    console.log(1); res()
-}))
-    .syncThen(_ => console.log(2))
-    .then(_ => console.log(3)); console.log(4);
-
 const revP = (new ReversePromise(res => { console.log(1); res(); }))
     .then(_ => console.log(2))
     .then(_ => console.log(3))
     .then(_ => console.log(4))
-    .run();
+
+
+// const { MyPromise, ReversePromise } = require('.');
+
+// const myP = (new MyPromise(res => {
+//     console.log(1); res()
+// }))
+//     .syncThen(_ => console.log(2))
+//     .then(_ => console.log(3)); console.log(4);
+

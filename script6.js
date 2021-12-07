@@ -29,8 +29,6 @@ class Vector{
 
         newArrayForNewVector;
 
-        console.log(newArrayForNewVector.argements[0].lenght)
-
         for(let i=0; i < newArrayForNewVector.lenght; i++){
             console.log(returnedValue)
             returnedValue += newArrayForNewVector[i];
@@ -42,8 +40,8 @@ class Vector{
 }
 
 let a =	new	Vector([1, 2, 3]);
-var	b =	new	Vector([3, 4, 5]);
-var	c =	new	Vector([5, 6, 7, 8]);
+let	b =	new	Vector([3, 4, 5]);
+let	c =	new	Vector([5, 6, 7, 8]);
 
 console.log(a.add(b))
 console.log(a.subtract(b))
