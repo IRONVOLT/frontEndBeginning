@@ -14,12 +14,12 @@ abstract class Person {
   }
 }
 
-interface IEmployee {
-  addSkill(skill: string);
+interface IEmployee<T> {
+  addSkill(skill: T);
   getAllSkills(): any;
 }
 
-class Employee extends Person implements IEmployee {
+class Employee extends Person implements IEmployee<string> {
   possition: string;
   skills: string[] = [];
 
